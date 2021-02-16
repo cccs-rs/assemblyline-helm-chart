@@ -6,10 +6,6 @@
   {{template "assemblyline.coreService" .}}
 {{end}}
 ---
-{{with merge (dict "component" "watcher" "command" "assemblyline_core.watcher.run_watcher") . }}
-  {{template "assemblyline.coreService" .}}
-{{end}}
----
 {{with merge (dict "component" "expiry" "command" "assemblyline_core.expiry.run_expiry") . }}
   {{template "assemblyline.coreService" .}}
 {{end}}
@@ -46,10 +42,6 @@
   {{template "assemblyline.coreService" .}}
 {{end}}
 ---
-{{with merge (dict "component" "dispatcher-files" "command" "assemblyline_core.dispatching.run_files" "replicas" "3") . }}
-  {{template "assemblyline.coreService" .}}
-{{end}}
----
-{{with merge (dict "component" "dispatcher-submissions" "command" "assemblyline_core.dispatching.run_submissions") . }}
+{{with merge (dict "component" "dispatcher" "command" "assemblyline_core.dispatching" "replicas" .Values.dispatcherInstances ) . }}
   {{template "assemblyline.coreService" .}}
 {{end}}
